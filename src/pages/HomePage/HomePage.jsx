@@ -13,8 +13,7 @@ export function HomePage() {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    movieTrending('')
-    .then(setMovies);
+    movieTrending('').then(setMovies);
   }, []);
 
   console.log(movies);

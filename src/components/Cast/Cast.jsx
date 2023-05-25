@@ -1,21 +1,17 @@
-
-import {movieCast} from '../../services/API';
+import { movieCast } from '../../services/API';
 import { useParams } from 'react-router-dom';
-import { useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import { IMAGE_URL, PLACEHOLDER } from '../../utilits/utilits';
-
-
+import { CastList, CastItem } from './Cast.styled.jsx';
 
 export function Cast() {
-
-  const {movieId} = useParams();
+  const { movieId } = useParams();
   const [cast, setCast] = useState([]);
   console.log(movieId);
 
-
-  useEffect (() =>{
-    const fetchCast = async () =>{
-      try{
+  useEffect(() => {
+    const fetchCast = async () => {
+      try {
         const cast = await movieCast(movieId);
         setCast(cast);
       } catch (e) {
@@ -23,22 +19,21 @@ export function Cast() {
       }
     };
     fetchCast();
-    },[movieId]);
-    
+  }, [movieId]);
 
   return (
     <>
-    {
-      <ul>
-        {
-           cast.map(({id, profile_path, original_name, character}) => (
-            <li key={id}>
-              <img src={`${
-                profile_path
-                  ? IMAGE_URL + profile_path
-                  : PLACEHOLDER + '?text=' + original_name
-              }`}
-              alt={original_name}
+      {
+        <CastList>
+          {cast.map(({ id, profile_path, original_name, character }) => (
+            <CastItem key={id}>
+              <img
+                src={`${
+                  profile_path
+                    ? IMAGE_URL + profile_path
+                    : PLACEHOLDER + '?text=' + original_name
+                }`}
+                alt={original_name}
               />
               <p>
                 <span> Actor:</span> {original_name}
@@ -46,11 +41,10 @@ export function Cast() {
               <p>
                 <span>Character:</span> {character}
               </p>
-            </li>
+            </CastItem>
           ))}
-  
-      </ul>
-    }
+        </CastList>
+      }
     </>
-  )
+  );
 }

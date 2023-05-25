@@ -3,7 +3,17 @@ import { useState, useEffect } from 'react';
 import { Outlet, useParams } from 'react-router-dom';
 import { movieById } from '../../services/API';
 import { IMAGE_URL, PLACEHOLDER } from '../../utilits/utilits';
-import { Link } from 'react-router-dom';
+import {
+  MovieBox,
+  MovieDescription,
+  Details,
+  TitleBox,
+  Owervies,
+  GenerList,
+  GenerItems,
+  UnderList,
+  StyledActiveLink,
+} from './MovieDetails.styled.jsx';
 
 export function MovieDetails() {
   const [movie, setMovie] = useState('null');
@@ -26,7 +36,7 @@ export function MovieDetails() {
 
   return (
     <div>
-      <div>
+      <MovieBox>
         <img
           src={`${
             poster_path
@@ -35,24 +45,24 @@ export function MovieDetails() {
           }`}
           alt=""
         />
-        <div>
-          <h2>{movie.original_title}</h2>
-          <h3>Rating: {Math.round(movie.vote_average)}</h3>
-          <h3>Overview</h3>
-          <p>{movie.overview}</p>
-          <h3>Genres</h3>
-          <ul>
+        <MovieDescription>
+          <TitleBox>{movie.original_title}</TitleBox>
+          <Details>Rating: {Math.round(movie.vote_average)}</Details>
+          <Details>Overview</Details>
+          <Owervies>{movie.overview}</Owervies>
+          <Details>Genres</Details>
+          <GenerList>
             {movie.genres?.map(genre => (
-              <li key={genre.id}>{genre.name}</li>
+              <GenerItems key={genre.id}>{genre.name}</GenerItems>
             ))}
-          </ul>
-        </div>
-      </div>
+          </GenerList>
+        </MovieDescription>
+      </MovieBox>
 
-      <ul>
-        <Link to="cast">cast</Link>
-        <Link to="reviews">reviews</Link>
-      </ul>
+      <UnderList>
+        <StyledActiveLink to="cast">cast</StyledActiveLink>
+        <StyledActiveLink to="reviews">reviews</StyledActiveLink>
+      </UnderList>
       <Outlet />
     </div>
   );

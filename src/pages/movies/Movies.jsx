@@ -1,10 +1,30 @@
 import { Form, Input, Button } from './Movies.styled';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
+import { movieByQuery } from '../../services/API';
+import { useSearchParams } from 'react-router-dom';
+import { ListFilms, StyledActiveLink } from './Movies.styled';
 
-export const Movies = ({ onSubmit }) => {
+export const Movies = () => {
   const [inputSearch, setInputSearch] = useState('');
+  const [movies, setMovies] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    const currentQuery = searchParams.get('query');
+    if (!currentQuery) return;
+
+    const fetchByQuery = async () => {
+      try {
+        const data = await movieByQuery(currentQuery);
+        setMovies(data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchByQuery();
+  }, [searchParams]);
 
   const handleInputChange = event => {
     setInputSearch(event.target.value);
@@ -16,7 +36,7 @@ export const Movies = ({ onSubmit }) => {
       toast.error('Nope, do it again..!');
       return;
     }
-
+    setSearchParams({ query: inputSearch });
     reset();
   };
 
@@ -26,7 +46,7 @@ export const Movies = ({ onSubmit }) => {
 
   return (
     <>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} setParams={setSearchParams}>
         <Input
           type="search"
           placeholder="Search"
@@ -36,6 +56,13 @@ export const Movies = ({ onSubmit }) => {
         />
         <Button type="submit">Search</Button>
       </Form>
+      {movies.map(({ id, original_title }) => (
+        <ListFilms key={id}>
+          <StyledActiveLink to={`/movies/${id}`}>
+            {original_title}
+          </StyledActiveLink>
+        </ListFilms>
+      ))}
       <ToastContainer autoClose={3000} />
     </>
   );

@@ -1,5 +1,4 @@
-import { Nav, Div, Ul,StyledActiveLink } from './Header.styled.jsx';
-
+import { Nav, Div, Ul, StyledActiveLink } from './Header.styled.jsx';
 
 export function Header() {
   return (
@@ -7,7 +6,7 @@ export function Header() {
       <Div>
         <Ul>
           <li>
-            <StyledActiveLink  to="/">Home </StyledActiveLink>
+            <StyledActiveLink to="/">Home </StyledActiveLink>
           </li>
           <li>
             <StyledActiveLink to="/movies"> Movies</StyledActiveLink>
