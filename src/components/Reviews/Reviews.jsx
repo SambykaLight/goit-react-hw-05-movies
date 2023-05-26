@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { ReviewList, ReviewItem, Author } from './Reviews.styled';
 
-export function Reviews() {
+const Reviews = () => {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
   console.log(reviews);
@@ -21,7 +21,7 @@ export function Reviews() {
   }, [movieId]);
 
   return reviews.length === 0 ? (
-    <h3>Nothing</h3>
+    <h3> Sorry Nothing</h3>
   ) : (
     <ReviewList>
       {reviews.map(({ id, author, content }) => (
@@ -34,4 +34,5 @@ export function Reviews() {
       ))}
     </ReviewList>
   );
-}
+};
+export default Reviews;

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Suspense, useRef } from 'react';
 import { useState, useEffect } from 'react';
-import { Outlet, useParams } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { movieById } from '../../services/API';
 import { IMAGE_URL, PLACEHOLDER } from '../../utilits/utilits';
 import {
@@ -13,12 +13,14 @@ import {
   GenerItems,
   UnderList,
   StyledActiveLink,
+  GoBack,
 } from './MovieDetails.styled.jsx';
 
-export function MovieDetails() {
+const MovieDetails = () => {
   const [movie, setMovie] = useState('null');
-
+  const location = useLocation();
   const { movieId } = useParams();
+  const goBackRef = useRef(location.state?.from ?? '/movies');
 
   useEffect(() => {
     const fetchById = async () => {
@@ -36,8 +38,11 @@ export function MovieDetails() {
 
   return (
     <div>
+      <GoBack>
+        <StyledActiveLink to={goBackRef.current}>Go Back</StyledActiveLink>
+      </GoBack>
       <MovieBox>
-        <img
+        <imga
           src={`${
             poster_path
               ? IMAGE_URL + poster_path
@@ -60,10 +65,17 @@ export function MovieDetails() {
       </MovieBox>
 
       <UnderList>
-        <StyledActiveLink to="cast">cast</StyledActiveLink>
-        <StyledActiveLink to="reviews">reviews</StyledActiveLink>
+        <StyledActiveLink to="cast" state={location.state}>
+          cast
+        </StyledActiveLink>
+        <StyledActiveLink to="reviews" state={location.state}>
+          reviews
+        </StyledActiveLink>
       </UnderList>
-      <Outlet />
+      <Suspense fallback={<div>LOADING...</div>}>
+        <Outlet />
+      </Suspense>
     </div>
   );
-}
+};
+export default MovieDetails;

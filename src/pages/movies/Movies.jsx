@@ -3,16 +3,17 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import { movieByQuery } from '../../services/API';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import { ListFilms, StyledActiveLink } from './Movies.styled';
 
-export const Movies = () => {
+ const Movies = () => {
   const [inputSearch, setInputSearch] = useState('');
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
 
   useEffect(() => {
-    const currentQuery = searchParams.get('query');
+    const currentQuery = searchParams.get('query') ?? '';
     if (!currentQuery) return;
 
     const fetchByQuery = async () => {
@@ -40,6 +41,14 @@ export const Movies = () => {
     reset();
   };
 
+  // const updateQuery = event =>{
+  //   if(event.target.value === ''){
+  //     return setSearchParams({});
+  //   }
+  //   setSearchParams({ query: inputSearch });
+
+  // }
+
   const reset = () => {
     setInputSearch('');
   };
@@ -58,7 +67,7 @@ export const Movies = () => {
       </Form>
       {movies.map(({ id, original_title }) => (
         <ListFilms key={id}>
-          <StyledActiveLink to={`/movies/${id}`}>
+          <StyledActiveLink to={`/movies/${id}`} state={{ from: location }}>
             {original_title}
           </StyledActiveLink>
         </ListFilms>
@@ -67,3 +76,4 @@ export const Movies = () => {
     </>
   );
 };
+export default Movies;

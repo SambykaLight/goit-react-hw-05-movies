@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 export const Title = styled.h1`
   color: white;
+  font-size: 3rem;
+  text-align: center;
 `;
 
 export const MovieUl = styled.ul`
@@ -20,9 +22,9 @@ export const MovieUl = styled.ul`
 
 export const MovieLi = styled.li`
   color: red;
-  fontweight: 'bold';
-  font-size: 20px;
+  font-size: 35px;
   text-decoration: none;
+  background-color: rgb(83, 11, 12);
 
   &:hover {
     transform: scale(1.03);
@@ -38,7 +40,6 @@ export const StyledActiveLink = styled(Link)`
 
 export const ImgPic = styled.img`
   width: 100%;
-  height: 260px;
   object-fit: cover;
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 `;

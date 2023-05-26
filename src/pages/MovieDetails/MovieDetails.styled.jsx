@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export const MovieBox = styled.div`
   width: 100%;
   height: 400px;
-  margin: 10px;
+  margin: 30px;
   border: 1px solid #ccc;
   display: flex;
   justify-content: space-between;
@@ -65,4 +65,9 @@ export const StyledActiveLink = styled(Link)`
     background-color: #1c1c1c;
     color: #fff;
   }
+`;
+
+export const GoBack = styled.div`
+  margin-top: 30px;
+  margin-left: 30px;
 `;

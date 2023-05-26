@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { IMAGE_URL, PLACEHOLDER } from '../../utilits/utilits';
 import { CastList, CastItem } from './Cast.styled.jsx';
 
-export function Cast() {
+const Cast = () => {
   const { movieId } = useParams();
   const [cast, setCast] = useState([]);
   console.log(movieId);
@@ -47,4 +47,5 @@ export function Cast() {
       }
     </>
   );
-}
+};
+export default Cast;

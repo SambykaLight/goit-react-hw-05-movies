@@ -8,15 +8,15 @@ import {
   StyledActiveLink,
 } from './HomePage.styled.jsx';
 import { IMAGE_URL, PLACEHOLDER } from '../../utilits/utilits';
+import { useLocation } from 'react-router-dom';
 
-export function HomePage() {
+const HomePage = () => {
   const [movies, setMovies] = useState([]);
+  const location = useLocation();
 
   useEffect(() => {
     movieTrending('').then(setMovies);
   }, []);
-
-  console.log(movies);
 
   return (
     <>
@@ -32,7 +32,7 @@ export function HomePage() {
               }`}
               alt={original_title}
             />
-            <StyledActiveLink to={`/movies/${id}`}>
+            <StyledActiveLink to={`/movies/${id}`} state={{ from: location }}>
               {original_title}
             </StyledActiveLink>
           </MovieLi>
@@ -40,4 +40,5 @@ export function HomePage() {
       </MovieUl>
     </>
   );
-}
+};
+export default HomePage;
