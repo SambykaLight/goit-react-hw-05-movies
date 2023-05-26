@@ -1,7 +1,7 @@
 import { movieReviews } from '../../services/API';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { ReviewList, ReviewItem, Author,Nothing } from './Reviews.styled';
+import { ReviewList, ReviewItem, Author, Nothing } from './Reviews.styled';
 
 const Reviews = () => {
   const { movieId } = useParams();

@@ -1,7 +1,5 @@
 import { Form, Input, Button } from './Movies.styled';
 import { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
-import { ToastContainer } from 'react-toastify';
 import { movieByQuery } from '../../services/API';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { ListFilms, StyledActiveLink } from './Movies.styled';
@@ -33,10 +31,7 @@ import { ListFilms, StyledActiveLink } from './Movies.styled';
 
   const handleSubmit = event => {
     event.preventDefault();
-    if (inputSearch.trim() === '') {
-      toast.error('Nope, do it again..!');
-      return;
-    }
+    
     setSearchParams({ query: inputSearch });
     reset();
   };
@@ -66,7 +61,6 @@ import { ListFilms, StyledActiveLink } from './Movies.styled';
           </StyledActiveLink>
         </ListFilms>
       ))}
-      <ToastContainer autoClose={3000} />
     </>
   );
 };

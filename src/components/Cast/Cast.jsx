@@ -2,7 +2,7 @@ import { movieCast } from '../../services/API';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { IMAGE_URL, PLACEHOLDER } from '../../utilits/utilits';
-import { CastList, CastItem } from './Cast.styled.jsx';
+import { CastList, CastItem, NothingCast } from './Cast.styled.jsx';
 
 const Cast = () => {
   const { movieId } = useParams();
@@ -21,7 +21,9 @@ const Cast = () => {
     fetchCast();
   }, [movieId]);
 
-  return (
+  return cast.length === 0 ? (
+    <NothingCast>Sorry Nothing</NothingCast>
+  ) : (
     <>
       {
         <CastList>

@@ -30,3 +30,7 @@ export const CastItem = styled.li`
     color: red;
   }
 `;
+
+export const NothingCast = styled.h3`
+  color: white;
+`;
