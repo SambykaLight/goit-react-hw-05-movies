@@ -41,13 +41,7 @@ import { ListFilms, StyledActiveLink } from './Movies.styled';
     reset();
   };
 
-  // const updateQuery = event =>{
-  //   if(event.target.value === ''){
-  //     return setSearchParams({});
-  //   }
-  //   setSearchParams({ query: inputSearch });
-
-  // }
+  
 
   const reset = () => {
     setInputSearch('');

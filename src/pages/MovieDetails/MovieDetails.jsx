@@ -42,7 +42,7 @@ const MovieDetails = () => {
         <StyledActiveLink to={goBackRef.current}>Go Back</StyledActiveLink>
       </GoBack>
       <MovieBox>
-        <imga
+        <img
           src={`${
             poster_path
               ? IMAGE_URL + poster_path

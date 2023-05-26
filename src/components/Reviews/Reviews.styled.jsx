@@ -17,10 +17,10 @@ export const ReviewItem = styled.li`
     color: red;
   }
 
-  //   p{
-  //     color: #888888;
-  //     margin-top: 6px;
-  //   }
+`;
+
+export const Nothing = styled.h3`
+color: white;
 `;
 
 export const Author = styled.p`
